@@ -130,3 +130,25 @@ wandb/
 
 debug/
 *_debug/
+
+# ============================================================
+# Local deployment / sharing artifacts
+# ============================================================
+
+# Cloudflare Tunnel executable and runtime logs
+cloudflared.exe
+cloudflared.log
+*.out.log
+*.err.log
+outputs_training.log
+pip_*.log
+
+# Wrongly downloaded archive and unrelated local clones
+657.tgz
+brian/
+brian-dection/
+
+# Web demo test artifacts
+web_test_data.json
+web_test_result.png
+share/

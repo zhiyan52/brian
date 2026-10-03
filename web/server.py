@@ -358,4 +358,5 @@ app.mount(
 )
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    # 0.0.0.0 表示监听所有网卡，同一局域网（同一 WiFi/办公网络）的设备可通过本机内网 IP 访问
+    uvicorn.run(app, host="0.0.0.0", port=8000)
