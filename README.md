@@ -749,6 +749,7 @@ The goal is to make the workflow reproducible and maintainable rather than tying
 
 More detailed technical documentation is available in:
 
+- [`docs/team_setup.md`](docs/team_setup.md) — team onboarding guide (Windows): environment setup, data/model placement, web demo, and Git collaboration workflow.
 - [`docs/architecture.md`](docs/architecture.md) — model architecture, data flow, preprocessing, inference, QC, and software design.
 - [`docs/experiments.md`](docs/experiments.md) — controlled experiments, ablations, validation results, TTA evaluation, and interpretation of experimental findings.
 - `data/README.md` — dataset organization and preparation.
