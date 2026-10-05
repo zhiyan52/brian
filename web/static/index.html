@@ -11,34 +11,56 @@
     font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
     background: #f0f2f5; color: #1a1a2e;
     min-height: 100vh; display: flex; flex-direction: column; align-items: center;
-    padding: 32px 20px;
+    padding: 24px 16px;
   }
-  .header { text-align: center; margin-bottom: 28px; }
-  .header h1 { font-size: 1.5rem; color: #1a3a5c; }
-  .header .sub { color: #6b7a8d; font-size: .85rem; margin-top: 4px; }
+  .header { text-align: center; margin-bottom: 20px; }
+  .header h1 { font-size: 1.45rem; color: #1a3a5c; }
+  .header .sub { color: #6b7a8d; font-size: .83rem; margin-top: 4px; }
   .card {
     background: #fff; border: 1px solid #dde3ec; border-radius: 12px;
-    padding: 24px; width: 100%; max-width: 960px; margin-bottom: 20px;
+    padding: 22px; width: 100%; max-width: 1000px; margin-bottom: 18px;
     box-shadow: 0 1px 4px rgba(0,0,0,.06);
   }
   .card h3 { color: #1a3a5c; margin-bottom: 14px; font-size: 1rem; }
+
+  /* 标签切换 */
+  .tabs { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+  .tab {
+    padding: 8px 20px; border: 1px solid #cbd5e1; background: #f8fafc;
+    border-radius: 8px; cursor: pointer; font-size: .9rem; color: #475569;
+    transition: all .2s;
+  }
+  .tab.active { background: #3a7bd5; color: #fff; border-color: #3a7bd5; }
+
   .dropzone {
-    border: 2px dashed #b0c4de; border-radius: 10px; padding: 36px;
+    border: 2px dashed #b0c4de; border-radius: 10px; padding: 30px;
     text-align: center; cursor: pointer; transition: all .2s;
   }
   .dropzone:hover, .dropzone.drag { border-color: #3a7bd5; background: #f0f7ff; }
   .dropzone strong { color: #3a7bd5; }
-  .dropzone p { color: #8b9bb4; margin-top: 6px; font-size: .82rem; }
-  #fileInput { display: none; }
+  .dropzone p { color: #8b9bb4; margin-top: 6px; font-size: .8rem; }
+  input[type=file] { display: none; }
+
+  /* 患者信息 */
+  .patient-info { display: flex; gap: 14px; margin-top: 14px; flex-wrap: wrap; align-items: center; }
+  .patient-info label { font-size: .85rem; color: #475569; }
+  .patient-info input, .patient-info select {
+    padding: 6px 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: .9rem;
+  }
+  .patient-info input { width: 80px; }
+
   .btn {
     background: #3a7bd5; color: #fff; border: none; border-radius: 8px;
-    padding: 10px 28px; font-size: .92rem; cursor: pointer; margin-top: 14px;
+    padding: 10px 26px; font-size: .92rem; cursor: pointer; margin-top: 14px;
     transition: background .2s;
   }
   .btn:hover { background: #2d6ab8; }
   .btn:disabled { background: #b0c4de; cursor: not-allowed; }
   .btn.secondary { background: #6b7a8d; }
   .btn.secondary:hover { background: #5a6a7d; }
+  .btn.success { background: #2e8b57; }
+  .btn.success:hover { background: #256e46; }
+
   #status { margin-top: 12px; font-size: .88rem; color: #2e8b57; min-height: 1.2em; }
   #status.error { color: #d43f3f; }
   .spinner {
@@ -55,14 +77,21 @@
     background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px;
     padding: 14px 16px; text-align: center;
   }
-  .metric-card .val { font-size: 1.35rem; font-weight: 700; }
+  .metric-card .val { font-size: 1.3rem; font-weight: 700; }
   .metric-card .lbl { font-size: .75rem; color: #64748b; margin-top: 4px; }
   .metric-card .unit { font-size: .72rem; color: #94a3b8; }
 
+  /* 参考范围对比表 */
+  .ref-table { width: 100%; border-collapse: collapse; font-size: .85rem; margin-top: 14px; }
+  .ref-table th, .ref-table td {
+    padding: 7px 10px; text-align: center; border-bottom: 1px solid #e2e8f0;
+  }
+  .ref-table th { background: #f1f5f9; color: #475569; font-weight: 600; }
+
   /* 萎缩分级 */
   .atrophy-badge {
-    display: inline-block; padding: 6px 18px; border-radius: 20px;
-    font-weight: 600; font-size: .95rem; color: #fff; margin-top: 8px;
+    display: inline-block; padding: 8px 22px; border-radius: 20px;
+    font-weight: 700; font-size: 1rem; color: #fff; margin-top: 8px;
   }
 
   /* 比值条 */
@@ -73,17 +102,14 @@
   .ratio-row .bar-fill { height: 100%; border-radius: 9px; transition: width .6s; }
   .ratio-row .pct { width: 60px; text-align: right; font-weight: 600; color: #334155; }
 
-  /* 三视图 */
   #overlayImg { width: 100%; border-radius: 8px; }
-
-  /* 3D */
   #plot3d { width: 100%; height: 420px; }
 
   /* 报告 */
   .report-header { border-bottom: 2px solid #1a3a5c; padding-bottom: 12px; margin-bottom: 16px; }
   .report-header h2 { color: #1a3a5c; font-size: 1.1rem; }
   .report-header .meta { color: #64748b; font-size: .8rem; margin-top: 4px; }
-  .report-table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+  .report-table { width: 100%; border-collapse: collapse; font-size: .86rem; }
   .report-table th, .report-table td {
     padding: 8px 12px; text-align: left; border-bottom: 1px solid #e2e8f0;
   }
@@ -92,7 +118,17 @@
     background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px;
     padding: 12px 16px; font-size: .82rem; color: #92400e; margin-top: 16px;
   }
+  .interp { background: #eff6ff; border-left: 4px solid #3a7bd5; padding: 10px 14px; margin-top: 10px; border-radius: 0 8px 8px 0; font-size: .85rem; color: #1e40af; }
+
+  /* 纵向对比 */
+  .long-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .long-box { border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px; }
+  .long-box h4 { color: #1a3a5c; font-size: .9rem; margin-bottom: 8px; }
+  .delta-pos { color: #d43f3f; font-weight: 600; }
+  .delta-neg { color: #2e8b57; font-weight: 600; }
+
   .hidden { display: none !important; }
+  .flex-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
 
   @media print {
     body { background: #fff; padding: 0; }
@@ -108,18 +144,78 @@
   <div class="sub">基于 3D U-Net 的 MRI 脑组织分割与萎缩定量评估 · 辅助阿尔茨海默早期筛查</div>
 </div>
 
-<!-- 上传 -->
+<!-- 标签切换 -->
 <div class="card no-print">
-  <h3>上传影像</h3>
-  <div class="dropzone" id="dropzone">
-    <strong>点击选择或拖入文件</strong>
-    <p>支持 .nii / .nii.gz（NIfTI）或 .zip（DICOM 序列打包）</p>
-    <p style="margin-top:4px;color:#a0aec0">建议使用去颅骨 T1 加权 MRI（如 IBSR 格式）</p>
-    <input type="file" id="fileInput" accept=".nii,.nii.gz,.zip">
+  <div class="tabs">
+    <div class="tab active" data-tab="single">单次分析</div>
+    <div class="tab" data-tab="longitudinal">纵向对比（随访）</div>
   </div>
-  <div id="fileName" style="margin-top:10px;color:#3a7bd5;font-weight:500"></div>
-  <button class="btn" id="runBtn" disabled>开始分析</button>
-  <div id="status"></div>
+
+  <!-- 单次分析 -->
+  <div id="tab-single">
+    <h3>上传单次 MRI 影像</h3>
+    <div class="dropzone" id="dropzone">
+      <strong>点击选择或拖入文件</strong>
+      <p>支持 .nii / .nii.gz（NIfTI）或 .zip（DICOM 序列打包）</p>
+      <p style="margin-top:4px;color:#a0aec0">建议使用去颅骨 T1 加权 MRI</p>
+      <input type="file" id="fileInput" accept=".nii,.nii.gz,.zip">
+    </div>
+    <div id="fileName" style="margin-top:10px;color:#3a7bd5;font-weight:500"></div>
+    <div class="patient-info">
+      <label>年龄 <input type="number" id="ageInput" min="0" max="120" placeholder="如 65"></label>
+      <label>性别
+        <select id="sexInput">
+          <option value="">未提供</option>
+          <option value="M">男</option>
+          <option value="F">女</option>
+        </select>
+      </label>
+      <span style="font-size:.78rem;color:#94a3b8">用于匹配同龄同性别参考范围</span>
+    </div>
+    <div class="flex-row">
+      <button class="btn" id="runBtn" disabled>开始分析</button>
+      <button class="btn secondary" id="sampleBtn">加载示例数据</button>
+    </div>
+    <div id="status"></div>
+  </div>
+
+  <!-- 纵向对比 -->
+  <div id="tab-longitudinal" class="hidden">
+    <h3>纵向对比（同一患者两次扫描）</h3>
+    <div class="long-grid">
+      <div class="long-box">
+        <h4>基线扫描（较早）</h4>
+        <div class="dropzone" id="dzBase">
+          <strong>选择基线 MRI</strong>
+          <p>.nii / .nii.gz / .zip</p>
+          <input type="file" id="baseInput" accept=".nii,.nii.gz,.zip">
+        </div>
+        <div id="baseName" style="margin-top:8px;color:#3a7bd5;font-size:.85rem"></div>
+      </div>
+      <div class="long-box">
+        <h4>随访扫描（较晚）</h4>
+        <div class="dropzone" id="dzFollow">
+          <strong>选择随访 MRI</strong>
+          <p>.nii / .nii.gz / .zip</p>
+          <input type="file" id="followInput" accept=".nii,.nii.gz,.zip">
+        </div>
+        <div id="followName" style="margin-top:8px;color:#3a7bd5;font-size:.85rem"></div>
+      </div>
+    </div>
+    <div class="patient-info">
+      <label>两次间隔 <input type="number" id="intervalInput" min="0" placeholder="天数"> 天</label>
+      <label>年龄 <input type="number" id="ageInputL" min="0" max="120" placeholder="基线年龄"></label>
+      <label>性别
+        <select id="sexInputL">
+          <option value="">未提供</option>
+          <option value="M">男</option>
+          <option value="F">女</option>
+        </select>
+      </label>
+    </div>
+    <button class="btn" id="runLongBtn" disabled>开始纵向对比</button>
+    <div id="longStatus"></div>
+  </div>
 </div>
 
 <!-- 定量指标 -->
@@ -128,7 +224,7 @@
   <div class="metrics-grid" id="metricsGrid"></div>
 
   <div style="margin-top:16px">
-    <div style="font-size:.88rem;color:#475569;margin-bottom:8px">脑实质分数 (BPF) 与萎缩评估</div>
+    <div style="font-size:.88rem;color:#475569;margin-bottom:8px">组织占比与脑实质分数 (BPF)</div>
     <div class="ratio-bar">
       <div class="ratio-row">
         <span class="name">GM/TIV</span>
@@ -157,6 +253,17 @@
   </div>
 </div>
 
+<!-- 参考范围对比 -->
+<div class="card hidden" id="refCard">
+  <h3>同龄同性别参考范围对比</h3>
+  <div style="font-size:.82rem;color:#64748b;margin-bottom:10px" id="refMeta"></div>
+  <table class="ref-table">
+    <thead><tr><th>指标</th><th>测量值</th><th>同龄 P10</th><th>同龄 P50</th><th>同龄 P90</th><th>百分位</th><th>判定</th></tr></thead>
+    <tbody id="refBody"></tbody>
+  </table>
+  <div id="interpBox"></div>
+</div>
+
 <!-- 三视图 -->
 <div class="card hidden" id="overlayCard">
   <h3>三视图分割结果</h3>
@@ -167,6 +274,22 @@
 <div class="card hidden no-print" id="meshCard">
   <h3>3D 交互式渲染</h3>
   <div id="plot3d"></div>
+</div>
+
+<!-- 纵向对比结果 -->
+<div class="card hidden" id="longResultCard">
+  <h3>纵向对比结果</h3>
+  <div id="longGradeBox" style="text-align:center;margin-bottom:14px">
+    <span class="atrophy-badge" id="longGradeBadge">-</span>
+  </div>
+  <table class="report-table">
+    <thead><tr><th>组织</th><th>基线体积 (mL)</th><th>随访体积 (mL)</th><th>变化率</th><th>年化变化率</th></tr></thead>
+    <tbody id="longBody"></tbody>
+  </table>
+  <div class="report-note" style="margin-top:14px">
+    <strong>参考阈值：</strong>GM 年萎缩率正常衰老 &lt; 0.5%/年；0.5~1.5%/年 提示轻度认知障碍可疑；&gt; 1.5%/年 提示阿尔茨海默病可疑。
+    两次扫描需经刚性配准（本系统自动完成），体积在同一空间下对比。
+  </div>
 </div>
 
 <!-- 报告 -->
@@ -181,35 +304,61 @@
   </table>
   <div class="report-note">
     <strong>说明：</strong>本报告由 AI 辅助生成，仅供临床参考，不构成最终诊断。
-    本分析基于去颅骨（skull-stripped）T1 MRI，CSF 仅含脑室及脑沟内脑脊液，
-    因此 BPF 参考范围与全脑含颅骨数据不同（正常去颅骨 BPF ≈ 0.95–0.99）。
-    萎缩分级主要依据 CSF/TIV 比值与 VBR（脑室-脑比值）。
-    建议结合临床病史、认知评估及其他影像检查综合判断。
+    本分析基于去颅骨（skull-stripped）T1 MRI，CSF 仅含脑室及脑沟内脑脊液。
+    参考范围综合 ICBM / ADNI / OASIS 文献近似值，按年龄与性别匹配。
+    建议结合临床病史、认知评估（MMSE/MoCA）及其他影像检查综合判断。
   </div>
-  <button class="btn secondary no-print" style="margin-top:14px" onclick="window.print()">打印报告</button>
+  <div class="flex-row" style="margin-top:14px">
+    <button class="btn success no-print" id="pdfBtn">下载 PDF 报告</button>
+    <button class="btn secondary no-print" onclick="window.print()">打印报告</button>
+  </div>
 </div>
 
 <script>
+// ── 标签切换 ──
+document.querySelectorAll('.tab').forEach(t => {
+  t.onclick = () => {
+    document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById('tab-single').classList.toggle('hidden', t.dataset.tab !== 'single');
+    document.getElementById('tab-longitudinal').classList.toggle('hidden', t.dataset.tab !== 'longitudinal');
+  };
+});
+
+// ── 工具函数 ──
+function setStatus(msg, isErr, el) {
+  el = el || document.getElementById('status');
+  el.innerHTML = msg; el.className = isErr ? 'error' : '';
+}
+
+// ── 单次分析 ──
 const dz = document.getElementById('dropzone');
 const fi = document.getElementById('fileInput');
 const btn = document.getElementById('runBtn');
-const status = document.getElementById('status');
 let selectedFile = null;
 
 dz.onclick = () => fi.click();
 dz.ondragover = e => { e.preventDefault(); dz.classList.add('drag'); };
 dz.ondragleave = () => dz.classList.remove('drag');
-dz.ondrop = e => { e.preventDefault(); dz.classList.remove('drag'); if (e.dataTransfer.files.length) pick(e.dataTransfer.files[0]); };
-fi.onchange = () => fi.files.length && pick(fi.files[0]);
+dz.ondrop = e => { e.preventDefault(); dz.classList.remove('drag'); if (e.dataTransfer.files.length) pickFile(e.dataTransfer.files[0]); };
+fi.onchange = () => fi.files.length && pickFile(fi.files[0]);
 
-function pick(f) {
+function pickFile(f) {
   if (!/\.(nii|nii\.gz|zip)$/i.test(f.name)) { setStatus('仅支持 .nii / .nii.gz / .zip', true); return; }
   selectedFile = f;
   document.getElementById('fileName').textContent = f.name + ' (' + (f.size/1048576).toFixed(1) + ' MB)';
   btn.disabled = false;
   setStatus('');
 }
-function setStatus(msg, isErr) { status.innerHTML = msg; status.className = isErr ? 'error' : ''; }
+
+document.getElementById('sampleBtn').onclick = () => {
+  // 提示用户使用项目内置测试数据
+  const hint = '请在文件选择器中选择 data/raw/IBSR_02/IBSR_02.nii.gz（或 IBSR_10、IBSR_15）作为示例数据';
+  setStatus(hint);
+  fi.click();
+};
+
+let lastResult = null;
 
 btn.onclick = async () => {
   if (!selectedFile) return;
@@ -217,19 +366,49 @@ btn.onclick = async () => {
   setStatus('<span class="spinner"></span>正在分析（GPU 推理 + 定量计算）…');
   const fd = new FormData();
   fd.append('file', selectedFile);
+  const age = document.getElementById('ageInput').value;
+  const sex = document.getElementById('sexInput').value;
+  if (age) fd.append('age', age);
+  if (sex) fd.append('sex', sex);
   try {
     const res = await fetch('/api/predict', { method: 'POST', body: fd });
     const data = await res.json();
     if (!res.ok) throw new Error(data.detail || '分析失败');
+    lastResult = data;
     renderMetrics(data.metrics, data.shape);
+    renderReference(data.metrics);
     renderOverlay(data.overlay_png_base64);
     render3D(data.mesh);
     renderReport(data.metrics);
-    setStatus('分析完成');
+    setStatus('分析完成，可下载 PDF 报告');
   } catch (e) {
     setStatus('错误：' + e.message, true);
   } finally {
     btn.disabled = false;
+  }
+};
+
+document.getElementById('pdfBtn').onclick = async () => {
+  if (!lastResult) return;
+  const btn = document.getElementById('pdfBtn');
+  btn.disabled = true; btn.textContent = '生成中…';
+  try {
+    const res = await fetch('/api/report.pdf', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(lastResult),
+    });
+    if (!res.ok) throw new Error('生成失败');
+    const blob = await res.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = '脑萎缩定量分析报告.pdf';
+    document.body.appendChild(a); a.click(); a.remove();
+    URL.revokeObjectURL(url);
+  } catch (e) {
+    setStatus('PDF 生成失败：' + e.message, true);
+  } finally {
+    btn.disabled = false; btn.textContent = '下载 PDF 报告';
   }
 };
 
@@ -259,10 +438,39 @@ function renderMetrics(m, shape) {
   document.getElementById('pctBPF').textContent = (r['BPF']*100).toFixed(1) + '%';
 
   const badge = document.getElementById('atrophyBadge');
-  badge.textContent = m.atrophy_grade;
+  badge.textContent = m.atrophy_grade + '（综合评分 ' + m.composite_score + '）';
   badge.style.background = m.atrophy_color;
 
   document.getElementById('metricsCard').classList.remove('hidden');
+}
+
+function renderReference(m) {
+  const rc = m.reference_comparison;
+  if (!rc) { document.getElementById('refCard').classList.add('hidden'); return; }
+  const ageText = m.age ? m.age + '岁' : '未提供（默认60-75岁组）';
+  const sexText = m.sex === 'M' ? '男' : m.sex === 'F' ? '女' : '未提供';
+  document.getElementById('refMeta').textContent =
+    `参考人群：${rc.age_bucket}岁组 · ${sexText}性　|　百分位基于 ICBM/ADNI/OASIS 文献近似值`;
+
+  const r = rc.reference;
+  const pr = rc.percentiles;
+  const st = rc.status;
+  const sc = rc.status_colors;
+  const ratio = m.ratios;
+  const rows = [
+    ['GM/TIV', (ratio['GM/TIV']*100).toFixed(1)+'%', r.GM_pct.p10.toFixed(1)+'%', r.GM_pct.p50.toFixed(1)+'%', r.GM_pct.p90.toFixed(1)+'%', pr.GM, st.GM, sc.GM],
+    ['WM/TIV', (ratio['WM/TIV']*100).toFixed(1)+'%', r.WM_pct.p10.toFixed(1)+'%', r.WM_pct.p50.toFixed(1)+'%', r.WM_pct.p90.toFixed(1)+'%', pr.WM, st.WM, sc.WM],
+    ['CSF/TIV', (ratio['CSF/TIV']*100).toFixed(1)+'%', r.CSF_pct.p10.toFixed(1)+'%', r.CSF_pct.p50.toFixed(1)+'%', r.CSF_pct.p90.toFixed(1)+'%', pr.CSF, st.CSF, sc.CSF],
+    ['BPF', (ratio['BPF']*100).toFixed(1)+'%', (r.BPF.p10*100).toFixed(1)+'%', (r.BPF.p50*100).toFixed(1)+'%', (r.BPF.p90*100).toFixed(1)+'%', pr.BPF, st.BPF, sc.BPF],
+  ];
+  document.getElementById('refBody').innerHTML = rows.map(rr =>
+    `<tr><td><strong>${rr[0]}</strong></td><td>${rr[1]}</td><td>${rr[2]}</td><td><strong>${rr[3]}</strong></td><td>${rr[4]}</td><td><strong>${rr[5]}</strong></td><td style="color:${rr[7]};font-weight:600">${rr[6]}</td></tr>`
+  ).join('');
+
+  const interpBox = document.getElementById('interpBox');
+  interpBox.innerHTML = m.interpretations.map(t => `<div class="interp">${t}</div>`).join('');
+
+  document.getElementById('refCard').classList.remove('hidden');
 }
 
 function renderOverlay(b64) {
@@ -279,15 +487,12 @@ function render3D(mesh) {
       type: 'mesh3d',
       x: v.map(p => p[0]), y: v.map(p => p[1]), z: v.map(p => p[2]),
       i: f.map(t => t[0]), j: f.map(t => t[1]), k: f.map(t => t[2]),
-      color: m.color, opacity: 0.55, name: name,
-      hoverinfo: 'name',
+      color: m.color, opacity: 0.55, name: name, hoverinfo: 'name',
     });
   }
   Plotly.newPlot('plot3d', traces, {
     scene: { xaxis:{title:'X'}, yaxis:{title:'Y'}, zaxis:{title:'Z'}, aspectmode:'data' },
-    margin: { l:0, r:0, t:30, b:0 },
-    showlegend: true,
-    legend: { x:0, y:1 },
+    margin: { l:0, r:0, t:30, b:0 }, showlegend: true, legend: { x:0, y:1 },
   }, { responsive: true });
   document.getElementById('meshCard').classList.remove('hidden');
 }
@@ -295,22 +500,86 @@ function render3D(mesh) {
 function renderReport(m) {
   const now = new Date().toLocaleString('zh-CN');
   document.getElementById('reportMeta').textContent = '生成时间：' + now;
+  const rc = m.reference_comparison || {};
   const rows = [
-    ['CSF 体积', m.volumes_ml.CSF + ' mL', '—', '脑脊液（脑室+脑沟）'],
-    ['灰质体积 (GM)', m.volumes_ml.GM + ' mL', '—', '大脑皮层灰质'],
-    ['白质体积 (WM)', m.volumes_ml.WM + ' mL', '—', '大脑白质'],
-    ['总颅内体积 (TIV)', m.tiv_ml + ' mL', '—', 'GM + WM + CSF（去颅骨后）'],
-    ['GM/TIV', (m.ratios['GM/TIV']*100).toFixed(1) + '%', '55–65%', '灰质占比（去颅骨）'],
-    ['WM/TIV', (m.ratios['WM/TIV']*100).toFixed(1) + '%', '30–45%', '白质占比（去颅骨）'],
-    ['CSF/TIV', (m.ratios['CSF/TIV']*100).toFixed(1) + '%', '< 2.5%', '脑脊液占比（去颅骨）'],
-    ['脑实质分数 (BPF)', (m.ratios['BPF']*100).toFixed(1) + '%', '95–99%（去颅骨）', m.atrophy_grade],
+    ['CSF 体积', m.volumes_ml.CSF + ' mL', '—', rc.status?.CSF || '-'],
+    ['灰质体积 (GM)', m.volumes_ml.GM + ' mL', '—', rc.status?.GM || '-'],
+    ['白质体积 (WM)', m.volumes_ml.WM + ' mL', '—', rc.status?.WM || '-'],
+    ['总颅内体积 (TIV)', m.tiv_ml + ' mL', '—', 'GM + WM + CSF'],
+    ['GM/TIV', (m.ratios['GM/TIV']*100).toFixed(1) + '%', `同龄P50=${rc.reference?.GM_pct?.p50 || '-'}%`, rc.status?.GM || '-'],
+    ['WM/TIV', (m.ratios['WM/TIV']*100).toFixed(1) + '%', `同龄P50=${rc.reference?.WM_pct?.p50 || '-'}%`, rc.status?.WM || '-'],
+    ['CSF/TIV', (m.ratios['CSF/TIV']*100).toFixed(1) + '%', `同龄P50=${rc.reference?.CSF_pct?.p50 || '-'}%`, rc.status?.CSF || '-'],
+    ['脑实质分数 (BPF)', (m.ratios['BPF']*100).toFixed(1) + '%', `同龄P50=${(rc.reference?.BPF?.p50||0)*100}%`, rc.status?.BPF || '-'],
     ['脑室 CSF 体积', m.ventricular_csf_ml + ' mL', '< 20 mL', '脑室扩大评估'],
-    ['脑室-脑比值 (VBR)', m.vbr.toFixed(4), '< 0.03', '脑室扩大指标'],
+    ['脑室-脑比值 (VBR)', m.vbr.toFixed(4), '< 0.03', m.vbr > 0.05 ? '脑室扩大' : '正常'],
+    ['综合萎缩评分', m.composite_score, '>50 正常', m.atrophy_grade],
   ];
   document.getElementById('reportBody').innerHTML = rows.map(r =>
     `<tr><td>${r[0]}</td><td><strong>${r[1]}</strong></td><td>${r[2]}</td><td>${r[3]}</td></tr>`
   ).join('');
   document.getElementById('reportCard').classList.remove('hidden');
+}
+
+// ── 纵向对比 ──
+const baseInput = document.getElementById('baseInput');
+const followInput = document.getElementById('followInput');
+const runLongBtn = document.getElementById('runLongBtn');
+let baseFile = null, followFile = null;
+
+document.getElementById('dzBase').onclick = () => baseInput.click();
+document.getElementById('dzFollow').onclick = () => followInput.click();
+baseInput.onchange = () => { if (baseInput.files.length) { baseFile = baseInput.files[0]; document.getElementById('baseName').textContent = baseFile.name; checkLongReady(); } };
+followInput.onchange = () => { if (followInput.files.length) { followFile = followInput.files[0]; document.getElementById('followName').textContent = followFile.name; checkLongReady(); } };
+function checkLongReady() { runLongBtn.disabled = !(baseFile && followFile); }
+
+runLongBtn.onclick = async () => {
+  if (!baseFile || !followFile) return;
+  runLongBtn.disabled = true;
+  setStatus('<span class="spinner"></span>正在配准并分析两次扫描（约需 1 分钟）…', false, document.getElementById('longStatus'));
+  const fd = new FormData();
+  fd.append('baseline', baseFile);
+  fd.append('followup', followFile);
+  const interval = document.getElementById('intervalInput').value;
+  const age = document.getElementById('ageInputL').value;
+  const sex = document.getElementById('sexInputL').value;
+  if (interval) fd.append('interval_days', interval);
+  if (age) fd.append('age', age);
+  if (sex) fd.append('sex', sex);
+  try {
+    const res = await fetch('/api/predict_longitudinal', { method: 'POST', body: fd });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.detail || '分析失败');
+    renderLongitudinal(data);
+    setStatus('纵向对比完成', false, document.getElementById('longStatus'));
+  } catch (e) {
+    setStatus('错误：' + e.message, true, document.getElementById('longStatus'));
+  } finally {
+    runLongBtn.disabled = false;
+  }
+};
+
+function renderLongitudinal(data) {
+  const L = data.longitudinal;
+  const b = data.baseline.metrics.volumes_ml;
+  const f = data.followup.metrics.volumes_ml;
+  const fmtDelta = d => {
+    const cls = d < 0 ? 'delta-pos' : 'delta-neg';
+    const sign = d > 0 ? '+' : '';
+    return `<span class="${cls}">${sign}${d.toFixed(2)}%</span>`;
+  };
+  const rows = [
+    ['灰质 (GM)', b.GM, f.GM, L.gm_change_pct, L.gm_annual_pct],
+    ['白质 (WM)', b.WM, f.WM, L.wm_change_pct, L.wm_annual_pct],
+    ['脑脊液 (CSF)', b.CSF, f.CSF, L.csf_change_pct, null],
+  ];
+  document.getElementById('longBody').innerHTML = rows.map(r =>
+    `<tr><td><strong>${r[0]}</strong></td><td>${r[1].toFixed(1)}</td><td>${r[2].toFixed(1)}</td><td>${fmtDelta(r[3])}</td><td>${r[4] !== null ? fmtDelta(r[4]) + '/年' : '—'}</td></tr>`
+  ).join('');
+
+  const badge = document.getElementById('longGradeBadge');
+  badge.textContent = L.rate_grade;
+  badge.style.background = L.rate_color;
+  document.getElementById('longResultCard').classList.remove('hidden');
 }
 </script>
 </body>
